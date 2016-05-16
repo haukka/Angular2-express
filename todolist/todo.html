@@ -1,0 +1,34 @@
+    <div class="container">
+        <div class="jumbotron text-center" style="padding-bottom:2px;background-color: aliceblue;">
+            <h1 style="padding:40px; padding-top:66px;">Remplir votre todolist <span class="label label-info">{{ total }}</span></h1>
+			<h2>Nombre d'élément check: {{done}}</h2>
+			<h2>Nombre d'élément uncheck: {{total - done}}</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+         	   <div>Ajouter un élément : <input #newTodo (keyup.enter)="Add(newTodo.value); newTodo.value=''" placeholder="New text"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5 col-md-offset-1">
+			  	<h2>Checked</h2>
+			  	<template ngFor [ngForOf]="todos" let-todo="$implicit" let-i="index">
+			  		<li *ngIf="todo.isDone == true">
+			  		{{todo.text}} <input type="checkbox" [checked]="todo.isDone" (change)="Counter(todo)">
+			  		<button (click)="remove(i)">Remove</button>
+			  		</li>
+			  	</template>
+			</div>
+			<div class="col-md-5">
+			  	<h2>Unchecked</h2>
+			  	<template ngFor [ngForOf]="todos" let-todo="$implicit" let-i="index">
+			  		<li *ngIf="todo.isDone == false">
+			  		{{todo.text}} <input type="checkbox" [checked]="todo.isDone" (change)="Counter(todo)">
+			  		<button (click)="remove(i)">Remove</button>
+			  		</li>
+			  	</template>
+			</div>
+        </div>
+    </div>
